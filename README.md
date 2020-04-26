@@ -27,4 +27,16 @@ The PC I used for running ROS/YOLOv3 is a quad-core Ryzen 3, with an Nvidia GTX 
 
 #### Depth Camera:
 
+For this tutorial, I will be including installation instructions for using an Orbbec Astra Pro infrared depth camera.  I will update it later to include the Xbox 360 Kinect (which is actually significantly easier to install, but slightly less performant).  You can find information about Orbbec depth cameras from their website, and typically can find an Astra Pro pretty easily on Ebay or Amazon.  I bought mine on Ebay for about $90:
+http://shop.orbbec3d.com/Astra-Pro_p_35.html
 
+## Installation
+
+I would highly reccomend starting with a clean installation of Xubuntu 18.04, and cannot guarantee the functionality of this on anything else.  I've tested this setup process from start to finish as of April 26 2020 with Xubuntu 18.04 and can confirm it works without issue.  I'd reccomend buying a cheap 120GB SSD to dedicate to this.
+
+*When installing Xubuntu 18.04, uncheck installing any additional software in order to avoid issues with the wrong Nvidia drivers being installed.*
+
+After getting a fresh install of Xubuntu running, you're going to want to install Arduino 1.0.6 (Arbotix has issues with some of the newer Arduino releases).  That can be done here:
+https://www.arduino.cc/en/main/OldSoftwareReleases
+
+In order to get the proper sketch loaded onto the Arbotix controller, you can follow Trossens docs here, however be aware that they don't mention anything about not being compatible with the newest Arduino, and most of the documentation "additional driver" installation
