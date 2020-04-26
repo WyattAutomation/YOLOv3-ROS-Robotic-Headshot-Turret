@@ -4,7 +4,7 @@ Full build tutorial + code + pretrained weights for YOLOv3 to create a robotic t
 This is a detailed tutorial on how to use YOLOv3 to guide a robotic turret to aim for the dome.
 
 
-![Alt Text](https://github.com/WyattAutomation/YOLOv3-ROS-Robotic-Head-Shot-Turret-/blob/master/orbbec.gif?raw=true)
+![Alt Text](https://github.com/WyattAutomation/YOLOv3-ROS-Robotic-Head-Shot-Turret-/blob/master/orbbec.gif?raw=true | width=100)
 ![Alt Text](https://github.com/WyattAutomation/YOLOv3-ROS-Robotic-Head-Shot-Turret-/blob/master/lasershot.gif?raw=true)
 ![Alt Text](https://github.com/WyattAutomation/YOLOv3-ROS-Robotic-Head-Shot-Turret-/blob/master/kinectshot.gif?raw=true)
 
