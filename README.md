@@ -1,7 +1,9 @@
 # YOLOv3/ROS Robotic Pan/Tilt "Headshot" Turret
 ### Full Parts-List, Installation, and Build Tutorial with Code.
 
-This is an end-to-end build/installation tutorial with a full parts/hardware list, pretrained YOLOv3 weights for "Human head", and ROS packages to help create your own robotic pan/tilt turret that uses machine learning and relatively inexpensive hardware to autonomously "target" and track human heads.  You can see a few examples of it in action in the gifs below:    
+This is an end-to-end build/installation tutorial with a full parts/hardware list, pretrained YOLOv3 weights for "Human head", and ROS packages to build a robotic pan/tilt turret that uses machine learning and relatively inexpensive hardware to autonomously "target" and track human heads.  You can see a few examples of it in action in the gifs below:
+
+
 <img src="https://github.com/WyattAutomation/YOLOv3-ROS-Robotic-Head-Shot-Turret-/blob/master/orbbec.gif" height="400" width="285" align="left"> <img src="https://github.com/WyattAutomation/YOLOv3-ROS-Robotic-Head-Shot-Turret-/blob/master/lasershot.gif" height="400" width="510" align="right"> 
 <p align="center">
   <img src="https://github.com/WyattAutomation/YOLOv3-ROS-Robotic-Head-Shot-Turret-/blob/master/kinectshot.gif" height="440" width="660">
@@ -26,6 +28,17 @@ https://github.com/WyattAutomation/Train-YOLOv3-with-OpenImagesV4
 ## Getting Started
 
 ### Download and untar ROS_YOLO_headshot_main.tar.gz, containing all source code and files needed for this project, as well as the pretrained weights for detecting "Human head" from here:
+
+https://drive.google.com/drive/folders/1P23rZR8ul1poW_VWSHgcgzApEtZsTR-6?usp=sharing
+
+-After downloading from the above link, open a terminal and run the following to extract:
+
+```
+cd ~/Downloads/
+tar -xvf ROS_YOLO_headshot_main.tar.gz 
+```
+
+-This should extract everything to a folder at ~/Downloads/headshot_main
 
 
 ### Hardware Needed
@@ -79,7 +92,7 @@ I would highly reccomend starting with a clean installation of Xubuntu 18.04, an
 
 Get a "vanilla" installation of Xubuntu 18.04 running on a dedicated SSD, then proceeed to the next steps.
 
-#### Setting up Arbotix controller and Arduino:
+#### Arbotix controller and Arduino:
 Once you've built the physical turret kit, plug in the FTDI cable to the Arbotix and the other end to USB port on your PC, then plug in the power supply to the barrel connector on the Arbotix.
 
 Install dependencies for Arduino:
@@ -107,14 +120,99 @@ In Arduino:
 -Go to Tools->Board and make sure "ArbotiX" is selected
 
 -Go to Tools->Serial Port and make sure /dev/ttyUSB0 is selected
-(NOTE: /dev/ttyUSB0 is the default device that the USB FTDI cable coming out of your ArbotiX board should show up as.  If this is different, please open an issues thread and I'll provide docs on what needs to be done to change it) 
 
 -Go to File->Upload to upload the "ros" sketch to your ArbotiX board.  The code from this sketch may be commented to mention that it is for the ax-12a Dynamixels, but it works just as well for the 18s.  
+
+NOTES on ArobotiX/Dynamixels/Arduino:
+"/dev/ttyUSB0" for the serial port is the default device that the USB FTDI cable coming out of your ArbotiX board should show up as.  If this is different, please open an issues thread and I'll provide docs on what needs to be done to change it, as that is set up in the ROS packages and has to be changed there too if it is different.
 
 The drivers, libraries, and code for the ArbotiX Arduino Sketch above are from Trossen's quickstart guide here, though I would highly suggest NOT following it for the purpose of my project:
 https://learn.trossenrobotics.com/index.php/getting-started-with-the-arbotix/7-arbotix-quick-start-guide
 
 You can unplug the power supply to the ArbotiX with a reasonble amount of expection of it not ruining the board, if it's frozen, if the robot goes wildly out of control etc.  I have put all of this equipment through a significant amount of abuse and it is not fragile to physical strain or sudden loss of power (though I would avoid exposure to moisture/water/liquid).
 
-
+####  Xubuntu 18.04 Nvidia Driver and CUDA installation
  
+-Open a terminal and run the following commands to install the NVidia Drivers and CUDA 10.1
+
+```
+sudo apt update
+sudo add-apt-repository ppa:graphics-drivers/ppa
+
+sudo apt-key adv --fetch-keys  http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub
+
+sudo bash -c 'echo "deb http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64 /" > /etc/apt/sources.list.d/cuda.list'
+
+sudo bash -c 'echo "deb http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/x86_64 /" > /etc/apt/sources.list.d/cuda_learn.list'
+
+sudo apt update
+sudo apt install cuda-10-1
+sudo apt install libcudnn7
+
+```
+
+-Add CUDA library paths to ~./bashrc and reboot
+```
+echo "export PATH=/usr/local/cuda-10.1/bin:$PATH" >> ~/.bashrc
+echo "export LD_LIBRARY_PATH=/usr/local/cuda-10.1/lib64:$LD_LIBRARY_PATH" >> ~/.bashrc
+sudo reboot
+```
+-Check to make sure Nvidia driver installed after rebooting:
+```
+nvidia-smi
+```
+-Check CUDA installation too:
+```
+nvcc --version
+```
+
+#### Install ROS Melodic:
+
+Run the following in terminal:
+
+-Set up package sources for ROS:
+```
+sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+sudo apt update
+
+```
+
+-Install ROS melodic (takes a while):
+```
+sudo apt install ros-melodic-desktop-full
+```
+
+-set up .bashrc to auto source ROS installation, and source it in current terminal:
+```
+echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
+source ~/.bashrc
+```
+
+-Install ROS package tools and rosdep for python:
+```
+sudo apt install python-rosdep python-rosinstall python-rosinstall-generator python-wstool build-essential
+sudo apt install python-rosdep
+```
+
+-Initialize ROS and update rosdep:
+```
+sudo rosdep init
+rosdep update
+```
+
+#### Create New Catkin Workspace, Copy, and Build Sources for Headshot Project
+
+-Make a new catkin workspace where the code for this project will be placed:
+```
+mkdir -p ~/catkin_headshot/src
+cd ~/catkin_headshot/
+catkin_make
+```
+
+-Add the workspace to .bashrc and source it:
+```
+echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
+source ~/.bashrc
+```
+
