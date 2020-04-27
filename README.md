@@ -7,7 +7,26 @@ This is an end-to-end build/installation tutorial with a full parts/hardware lis
   <img src="https://github.com/WyattAutomation/YOLOv3-ROS-Robotic-Head-Shot-Turret-/blob/master/kinectshot.gif" height="440" width="660">
 </p>
 
+## Credit to other projects
+Of course, Joeseph Redmon's YOLOv3 is used in this project, which can be found here:
+https://pjreddie.com/darknet/yolo/
+
+The ROS Package for porting YOLOv3 to ROS used in this project is a fork of Legged Robotic's "darknet_ros" which can be found here:
+https://github.com/leggedrobotics/darknet_ros
+
+The ROS package for ros_astra_camera used in this project can be found here (ROS driver for the Orbbec Astra Pro):
+https://github.com/orbbec/ros_astra_camera
+
+And last, but certainly not least, the remaining 3 ROS packages used in this project, were based on and/or derived from code included in Patrick Goebel's (aka Pirobot) "Robotics by Example, Volume 2".  If you like my project here, please go take a look at RBX2, and if you can find a copy of Patrick's book I highly, highly reccomend buying it as it will point you in the right direction for *many* different applications of robotics well beyond the scope of my project here.  I started off having next to no knowledge of robotics before attempting this project, and his literature provided the what I needed in order to be successful here.
+https://github.com/pirobot
+
+Also, I will include a previous project of my own, where I document how to create the weights I use in this project for YOLOv3 from Google's Open Images Dataset:
+https://github.com/WyattAutomation/Train-YOLOv3-with-OpenImagesV4
+
 ## Getting Started
+
+### Download and untar ROS_YOLO_headshot_main.tar.gz, containing all source code and files needed for this project, as well as the pretrained weights for detecting "Human head" from here:
+
 
 ### Hardware
 
@@ -43,36 +62,46 @@ Get a "vanilla" installation of Xubuntu 18.04 running on a dedicated SSD, then p
 Installing dependencies for Arduino and opening the "ros" sketch for the Arbotix board:
 
 -Install Java 8 jdk for the older version of Arduino we are going to use:
-
 ```
 sudo apt install openjdk-8-jdk
 ```
 
--Copy "arduino-1.0.6" folder that you downloaded to your home directory
--Copy "arbotix-master" folder to Documents
--Open a terminal, change directory to the arduino directory, and run arduino:
+Install libusb-0.1-4:
+```
+sudo apt-get install libusb-0.1-4
+```
 
+
+-Copy "arduino-1.0.6" folder that you downloaded to your home directory
+
+-Open a terminal, change directory to the arduino directory, and run arduino:
 ```
 cd ~/arduino-1.0.6
 sudo bash arduino 
 ```
--Select "no" on "new version" install prompt, when the Arduino program opens
+
+-Select "no" on "new version" install prompt if asked, when the Arduino program opens
 
 In the Arduino gui go to:
 -File->Preferences
--Click "Browse" next to the field for "Sketchbook location:"
--In the dropdown change "/root" to "/"
--Navigate to "home/yourusername/Documents/arbotix-master/ArbotiX Sketches" then click ok
--Click ok to close preferences
--Close Arduino program, then open it again from the same terminal as before using:
 
-```
-cd ~/arduino-1.0.6
-sudo bash arduino 
-```
+-Click "Browse" next to the field for "Sketchbook location:"
+
+-In the dropdown change "/root" to "/"
+
+-Navigate to "home/yourusername/Documents/arbotix-master/ArbotiX Sketches" then click ok
+
+-Click ok to close preferences
 
 -Go to File->Sketchbook->ros and open it
 
-Loading the library to get Arduino "talking" to the Arbotix controller:
 
+#### Loading the Arbotix drivers, and adjust settings to get Arduino "talking" to the Arbotix controller:
 
+-Open a terminal and copy the "arbotix" folder from arbotix-master/hardware/ to arduino-1.0.6/hardware/
+
+```
+cp -r ~/Documents/arbotix-master/hardware/arbotix/ ~/arduino-1.0.6/hardware/
+```
+
+ 
