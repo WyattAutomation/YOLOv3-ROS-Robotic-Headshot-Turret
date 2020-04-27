@@ -36,9 +36,43 @@ I would highly reccomend starting with a clean installation of Xubuntu 18.04, an
 
 *When installing Xubuntu 18.04, uncheck installing any additional software in order to avoid issues with the wrong Nvidia drivers being installed.  Also, be careful to download 18.04 and not the newest 20.04!  I am working on a ROS2 improvement of this project that may be released in the near future, that will work with 20.04, but for now, stick with 18.04.*
 
-#### After getting a fresh, "vanilla" install of Xubuntu 18.04 running: 
+Get a "vanilla" installation of Xubuntu 18.04 running on a dedicated SSD, then proceeed to the next steps.
 
--Install Arduino 1.0.6 (Arbotix has issues with some of the newer Arduino releases).  That can be done here:
-https://www.arduino.cc/en/main/OldSoftwareReleases
+#### For Arduino and Arbotix Setup:
 
--In order to get the proper sketch loaded onto the Arbotix controller, you can follow Trossens docs here, however be aware that they don't mention anything about not being compatible with the newest Arduino, and most of the documentation on "additional driver" installation can be completely ignored.  Just get Arduino 1.0.6 loaded, talking to your 
+Installing dependencies for Arduino and opening the "ros" sketch for the Arbotix board:
+
+-Install Java 8 jdk for the older version of Arduino we are going to use:
+
+```
+sudo apt install openjdk-8-jdk
+```
+
+-Copy "arduino-1.0.6" folder that you downloaded to your home directory
+-Copy "arbotix-master" folder to Documents
+-Open a terminal, change directory to the arduino directory, and run arduino:
+
+```
+cd ~/arduino-1.0.6
+sudo bash arduino 
+```
+-Select "no" on "new version" install prompt, when the Arduino program opens
+
+In the Arduino gui go to:
+-File->Preferences
+-Click "Browse" next to the field for "Sketchbook location:"
+-In the dropdown change "/root" to "/"
+-Navigate to "home/yourusername/Documents/arbotix-master/ArbotiX Sketches" then click ok
+-Click ok to close preferences
+-Close Arduino program, then open it again from the same terminal as before using:
+
+```
+cd ~/arduino-1.0.6
+sudo bash arduino 
+```
+
+-Go to File->Sketchbook->ros and open it
+
+Loading the library to get Arduino "talking" to the Arbotix controller:
+
+
