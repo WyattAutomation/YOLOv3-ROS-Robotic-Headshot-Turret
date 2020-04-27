@@ -32,11 +32,13 @@ http://shop.orbbec3d.com/Astra-Pro_p_35.html
 
 ## Installation
 
-I would highly reccomend starting with a clean installation of Xubuntu 18.04, and cannot guarantee the functionality of this on anything else.  I've tested this setup process from start to finish as of April 26 2020 with Xubuntu 18.04 and can confirm it works without issue.  I'd reccomend buying a cheap 120GB SSD to dedicate to this.
+I would highly reccomend starting with a clean installation of Xubuntu 18.04, and cannot guarantee the functionality of this on anything else.  I've tested this setup process from start to finish as of April 26 2020 with Xubuntu 18.04 and can confirm it works without issue.  I'd reccomend buying a cheap 120GB SSD to dedicate to this project.
 
-*When installing Xubuntu 18.04, uncheck installing any additional software in order to avoid issues with the wrong Nvidia drivers being installed.*
+*When installing Xubuntu 18.04, uncheck installing any additional software in order to avoid issues with the wrong Nvidia drivers being installed.  Also, be careful to download 18.04 and not the newest 20.04!  I am working on a ROS2 improvement of this project that may be released in the near future, that will work with 20.04, but for now, stick with 18.04.*
 
-After getting a fresh install of Xubuntu running, you're going to want to install Arduino 1.0.6 (Arbotix has issues with some of the newer Arduino releases).  That can be done here:
+#### After getting a fresh, "vanilla" install of Xubuntu 18.04 running: 
+
+-Install Arduino 1.0.6 (Arbotix has issues with some of the newer Arduino releases).  That can be done here:
 https://www.arduino.cc/en/main/OldSoftwareReleases
 
-In order to get the proper sketch loaded onto the Arbotix controller, you can follow Trossens docs here, however be aware that they don't mention anything about not being compatible with the newest Arduino, and most of the documentation "additional driver" installation
+-In order to get the proper sketch loaded onto the Arbotix controller, you can follow Trossens docs here, however be aware that they don't mention anything about not being compatible with the newest Arduino, and most of the documentation on "additional driver" installation can be completely ignored.  Just get Arduino 1.0.6 loaded, talking to your 
