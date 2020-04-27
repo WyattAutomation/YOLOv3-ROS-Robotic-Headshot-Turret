@@ -40,6 +40,8 @@ tar -xvf ROS_YOLO_headshot_main.tar.gz
 
 -This should extract everything to a folder at ~/Downloads/headshot_main
 
+##### If you are just looking for the pretrained YOLOv3 weights for "Human head", they are located at "headshot_main/catkin_ws_src_files/darknet_ros/darknet_ros/yolo_network_config/weights/backup/" from the above download. 
+
 
 ### Hardware Needed
 
