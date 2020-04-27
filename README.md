@@ -216,3 +216,79 @@ echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
 source ~/.bashrc
 ```
 
+
+-Install remaining dependencies for ROS packages:
+```
+sudo apt install ros-melodic-libuvc-camera ros-melodic-arbotix ros-melodic-rgbd-launch
+```
+
+-Copy ROS Packages from the downloaded/extracted folder to the new catkin workspace and build it:
+```
+cp -r ~/Downloads/headshot_main/catkin_ws_src_files/. catkin_headshot/src/
+cd ~/catkin_headshot/
+catkin_make -DCMAKE_BUILD_TYPE=Release
+```
+
+-Copy the calibration files for the Astra Pro to home/.ros:
+```
+cp -r ~/Downloads/headshot_main/camera_info/ ~/.ros
+```
+
+
+-Add udev rules for the Orbbec Astra Pro, and rebuild Astra Pro ROS package:
+```
+roscd astra_camera
+sudo cp 56-orbbec-usb.rules /etc/udev/rules.d
+sudo service udev reload
+sudo service udev restart
+catkin_make --pkg astra_camera -DCMAKE_BUILD_TYPE=Release
+```
+
+
+-Add your user to "dialout" group to have permissions for the Arbotix via USB:
+```
+sudo usermod -a -G dialout $USER
+```
+
+
+-Make head_tracker.py and headtrack.py nodes executable:
+```
+roscd turret_controller/
+chmod +x nodes/head_tracker.py 
+roscd yolo_targeting/
+chmod +x nodes/head_track.py
+```
+
+
+*It's often a good idea to unplug the astra from whatever usb port it's in and move it to another here, and reboot.  Sometimes the ROS package for the Astra Pro can't find the device until after plugging it back into a different port and/or reboot.*
+
+-After reboot, run the headshot.py script in headshot_main:
+```
+python ~/Downloads/headshot_main/headshot.py
+```
+
+You may see warnings and several other things scroll quickly accross the terminal screen before landing at the collection of windows that look like they do in the screenshot below; with the pan/tilt turret now tracking the nearest detected "Human head"!
+
+
+## NOTES/Manual Launch Instructions/Debugging:
+
+If you have any issues with this not working from the headshot.py script, you can run each roslaunch command that the turret uses in seperate terminals for debugging.  
+
+#### If you are debugging or wish to run the roslaunch commands one-by-one instead of through the script:
+
+*-This command has to be run first, or none of the others will work properly!!*  This is for initializing roscore, the connection to the Arbotix board, and certain parameters of the actuators.  After the successful catkin_make earlier in the guide, the only associated file to adjust for this command (if there are issues with it) is the launchfile at "~/catkin_headshot/src/turret_init/launch/"
+```
+roslaunch turret_init turret_init.launch
+```
+
+-With the previous command still running, open another terminal and run this one directly after (the darknet and yolo_targeting packages both require this to be running first).  This is the launchfile to initialize the Astra Pro Camera:
+```
+roslaunch astra_camera astrapro.launch
+```
+
+-With the previous two roslaunch commands still running, open another terminal and run the next roslaunch command, which should center the servos and awaits the published "target" topic from the "yolo_targeting" package/node to tell it where to point the servos (via pose-stamped messages):
+```
+roslaunch turret_controller head_tracker.launch
+```
+
+-Open yet another terminal with the previous commands still running, and start the ros_darknet node, which I've preconfigured to load the weights for "Human head".  I have already put the weights in proper directory for this, as well as preconfigured the .yaml, yolo network config, launchfile and other related components to 
