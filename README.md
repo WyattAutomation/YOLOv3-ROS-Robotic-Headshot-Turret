@@ -28,16 +28,15 @@ https://github.com/WyattAutomation/Train-YOLOv3-with-OpenImagesV4
 ### Download and untar ROS_YOLO_headshot_main.tar.gz, containing all source code and files needed for this project, as well as the pretrained weights for detecting "Human head" from here:
 
 
-### Hardware
+### Hardware Needed
 
-*NOTE: Though I am currently working on an ARM version of this system for the Nvidia Jetson Nano (I have it 'functional', but not optimized well enough to reproduce the results in the gifs), this specific build tutorial is for x86 PC only!*
+*NOTE: Though I am currently working on an ARM version of this system for the Nvidia Jetson Nano (I have it 'functional', but not optimized well enough to reproduce the results in the gifs above), this specific build tutorial is for x86/PC only!*
 
 Let's get started with the hardware needed to make this work
 
-
 #### Robotics Components:
 
-I used a "Phantom X" turret kit from Trossen Robotics, with 2 AX-18A actuators, and an ArbotiX controller.  While the code from this repo should work just fine with the AX-12A actuators, I would highly reccomend spending the extra $100 for the 18s as I cannot attest to the performance of the AX-12As.  The 18s seem to have no problem slinging around 6lbs+ at high speed, and at about $300 USD for a decent kit with an arduino compatible controller, it's worth the money.  
+I used a "Phantom X" turret kit from Trossen Robotics, with 2 AX-18A actuators, and an ArbotiX controller.  While the code from this repo should work just fine with AX-12A actuators, I would highly reccomend spending the extra $100 and selecting the 18s when you order, as I cannot attest to the performance of the AX-12As.  The 18s seem to have no problem slinging around 6lbs+ at high speed, and at about $300 USD for a decent kit with an arduino compatible controller, it's worth the money.  Make sure whatever variant that you select, that it comes with the Arbotix Controller included with this kit:
 https://www.trossenrobotics.com/p/phantomX-robot-turret.aspx
 
 #### PC:
@@ -49,7 +48,30 @@ The PC I used for running ROS/YOLOv3 is a quad-core Ryzen 3, with an Nvidia GTX 
 For this tutorial, I will be including installation instructions for using an Orbbec Astra Pro infrared depth camera.  I will update it later to include the Xbox 360 Kinect (which is actually significantly easier to install, but slightly less performant).  You can find information about Orbbec depth cameras from their website, and typically can find an Astra Pro pretty easily on Ebay or Amazon.  I bought mine on Ebay for about $90:
 http://shop.orbbec3d.com/Astra-Pro_p_35.html
 
+#### Hardware Summary:
+
+1x Trossen Robotics "PhantomX" Robot Turret kit:
+```
+    1x ArbotiX Robocontroller
+    2x AX-12A or AX-18A Dynamixel Actuators
+    Black Bioloid Frames F2, F3
+    Dynamixel Robot Turret Base & Hardware Kit
+    1x 12v 2amp Power Supply
+    1x FTDI USB Cable
+```
+1x Orbbec Astra Pro Camera
+
+Desktop/Laptop PC:
+```
+    NVidia GPU, 4GB+ VRAM minimum, reccomended 2018 or newer
+    At least a quad-core, 3.0GHz per-core CPU, AMD or Intel
+```
+
 ## Installation
+
+#### OS:
+
+This guide is for Ubuntu Linux *only* (specifically, Xubuntu 18.04)!! *This project will not work on Windows, nor will I provide support on issues with Windows systems!!!!*
 
 I would highly reccomend starting with a clean installation of Xubuntu 18.04, and cannot guarantee the functionality of this on anything else.  I've tested this setup process from start to finish as of April 26 2020 with Xubuntu 18.04 and can confirm it works without issue.  I'd reccomend buying a cheap 120GB SSD to dedicate to this project.
 
@@ -57,51 +79,42 @@ I would highly reccomend starting with a clean installation of Xubuntu 18.04, an
 
 Get a "vanilla" installation of Xubuntu 18.04 running on a dedicated SSD, then proceeed to the next steps.
 
-#### For Arduino and Arbotix Setup:
+#### Setting up Arbotix controller and Arduino:
+Once you've built the physical turret kit, plug in the FTDI cable to the Arbotix and the other end to USB port on your PC, then plug in the power supply to the barrel connector on the Arbotix.
 
-Installing dependencies for Arduino and opening the "ros" sketch for the Arbotix board:
+Install dependencies for Arduino:
 
 -Install Java 8 jdk for the older version of Arduino we are going to use:
 ```
 sudo apt install openjdk-8-jdk
 ```
-
-Install libusb-0.1-4:
+-Install libusb-0.1-4:
 ```
 sudo apt-get install libusb-0.1-4
 ```
 
-
--Copy "arduino-1.0.6" folder that you downloaded to your home directory
-
--Open a terminal, change directory to the arduino directory, and run arduino:
+-Open a terminal, cd to the arduino-1.0.6 folder from the downloaded and extracted "headshot_main" folder, and run arduino:
 ```
-cd ~/arduino-1.0.6
+cd ~/Downloads/headshot_main/arduino-1.0.6
 sudo bash arduino 
 ```
+-Select "no" on "new version" install prompt (if asked), when the Arduino program opens
 
--Select "no" on "new version" install prompt if asked, when the Arduino program opens
-
-In the Arduino gui go to:
--File->Preferences
-
--Click "Browse" next to the field for "Sketchbook location:"
-
--In the dropdown change "/root" to "/"
-
--Navigate to "home/yourusername/Documents/arbotix-master/ArbotiX Sketches" then click ok
-
--Click ok to close preferences
+In Arduino:
 
 -Go to File->Sketchbook->ros and open it
 
+-Go to Tools->Board and make sure "ArbotiX" is selected
 
-#### Loading the Arbotix drivers, and adjust settings to get Arduino "talking" to the Arbotix controller:
+-Go to Tools->Serial Port and make sure /dev/ttyUSB0 is selected
+(NOTE: /dev/ttyUSB0 is the default device that the USB FTDI cable coming out of your ArbotiX board should show up as.  If this is different, please open an issues thread and I'll provide docs on what needs to be done to change it) 
 
--Open a terminal and copy the "arbotix" folder from arbotix-master/hardware/ to arduino-1.0.6/hardware/
+-Go to File->Upload to upload the "ros" sketch to your ArbotiX board.  The code from this sketch may be commented to mention that it is for the ax-12a Dynamixels, but it works just as well for the 18s.  
 
-```
-cp -r ~/Documents/arbotix-master/hardware/arbotix/ ~/arduino-1.0.6/hardware/
-```
+The drivers, libraries, and code for the ArbotiX Arduino Sketch above are from Trossen's quickstart guide here, though I would highly suggest NOT following it for the purpose of my project:
+https://learn.trossenrobotics.com/index.php/getting-started-with-the-arbotix/7-arbotix-quick-start-guide
+
+You can unplug the power supply to the ArbotiX with a reasonble amount of expection of it not ruining the board, if it's frozen, if the robot goes wildly out of control etc.  I have put all of this equipment through a significant amount of abuse and it is not fragile to physical strain or sudden loss of power (though I would avoid exposure to moisture/water/liquid).
+
 
  
