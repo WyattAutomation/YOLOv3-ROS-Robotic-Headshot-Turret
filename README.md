@@ -272,7 +272,9 @@ You may see warnings and several other things scroll quickly accross the termina
 
 ## NOTES/Manual Launch Instructions/Debugging:
 
-If you have any issues with this not working from the headshot.py script, you can run each roslaunch command that the turret uses in seperate terminals for debugging.  
+The Obbecc Astra Pro is *quite* finicky about wanting to sometimes be the last device that was plugged in.  If it's non-responsive, even after you've confirmed the udev rules are set correctly, try plugging it in to a different USB 3.0 port on a different bus, and reboot.  Replugging after a reboot sometimes helps too. 
+
+If you have any issues with this system not working from the headshot.py script, you can run each roslaunch command that the turret uses in seperate terminals for debugging, or for development purposes.  
 
 #### If you are debugging or wish to run the roslaunch commands one-by-one instead of through the script:
 
@@ -291,4 +293,19 @@ roslaunch astra_camera astrapro.launch
 roslaunch turret_controller head_tracker.launch
 ```
 
--Open yet another terminal with the previous commands still running, and start the ros_darknet node, which I've preconfigured to load the weights for "Human head".  I have already put the weights in proper directory for this, as well as preconfigured the .yaml, yolo network config, launchfile and other related components to 
+-Open yet another terminal with the previous commands still running, and start the ros_darknet node, which I've preconfigured to load the weights for "Human head".  This node subscribes to the rgb messages from the "/camera/rgb/image_raw" topic published by the Astra Camera node.  You can find this configured in "~/catkin_headshot/src/darknet_ros/darknet_ros/launch/ros_headshot.launch"   I have already put the weights in the proper directory for this, as well as preconfigured the .yaml files, the yolo network config, launchfile and other related components to work for detecting "human head".  Should you have issues with this node, the ros_darknet issues thread in the "credits" section at the start of this repo is a good place to start.  Roslaunch command for this package/node is:
+```
+roslaunch darknet_ros darknet_ros_headshot.launch
+```
+
+-Finally, with all of those above commands running, run the roslaunch command in another new terminal from the "yolo_targeting" package.  This launches the "head_track.py" node from the yolo_targeting package in your src folder in the catkin worksapce, which subscribes to the bounding box data topic published by the ros_darknet node and the depth registered pointcloud of the astra pro, uses the bounding box data to get the center x,y position of the object detected in the depth registered rgb image, converts that to the u,v 2D position of the center of the detected object in the depth frame, pulls the related 3D xyz data associated with the depth frame, and converts that to a pose stamped messaged that it then publishes for the turrent_controller/headtracker package/node to subscribe to.
+```
+roslaunch yolo_targeting head_track.launch
+```
+
+(I screwed up a little here with the naming and named the launchfile for this "head_track" when there's already a launchfile from the turrent_controller package named "head_tracker", but keep in mind they do completely different things).
+
+
+If there are any questions on using this with a Kinect, I will be updating it soon to include instructions for this.  You basically only need to change parameters for the ros_darknet node to subscribe to the image topic (which has a different name), and instead of the astra_pro_camera package, you'll use the freenect_stack package from another repo.  I will update this soon to include these instructions.
+
+Have fun, don't do anything stupid, and YOLO, robot style! (v3 at least)..
