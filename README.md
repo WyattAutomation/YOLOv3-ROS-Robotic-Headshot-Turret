@@ -88,9 +88,7 @@ Desktop/Laptop PC:
 
 #### OS:
 
-This guide is for Ubuntu Linux *only* (specifically, Xubuntu 18.04)!! *This project will not work on Windows, nor will I provide support on issues with Windows systems!!!!*
-
-I would highly reccomend starting with a clean installation of Xubuntu 18.04, and cannot guarantee the functionality of this on anything else.  I've tested this setup process from start to finish as of April 26 2020 with Xubuntu 18.04 and can confirm it works without issue.  I'd reccomend buying a cheap 120GB SSD to dedicate to this project.
+I've tested this setup process from start to finish as of April 26 2020 with Xubuntu 18.04 and can confirm it works without issue.
 
 *When installing Xubuntu 18.04, uncheck installing any additional software in order to avoid issues with the wrong Nvidia drivers being installed.  Also, be careful to download 18.04 and not the newest 20.04!  I am working on a ROS2 improvement of this project that may be released in the near future, that will work with 20.04, but for now, stick with 18.04.*
 
