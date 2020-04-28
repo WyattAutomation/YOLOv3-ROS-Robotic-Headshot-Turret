@@ -151,10 +151,9 @@ sudo bash -c 'echo "deb http://developer.download.nvidia.com/compute/machine-lea
 sudo apt update
 sudo apt install cuda-10-1
 sudo apt install libcudnn7
-
 ```
 
--Add CUDA library paths to ~./bashrc and reboot
+-Add CUDA library paths to ~./bashrc and reboot:
 ```
 echo "export PATH=/usr/local/cuda-10.1/bin:$PATH" >> ~/.bashrc
 echo "export LD_LIBRARY_PATH=/usr/local/cuda-10.1/lib64:$LD_LIBRARY_PATH" >> ~/.bashrc
