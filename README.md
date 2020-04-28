@@ -1,4 +1,4 @@
-# YOLOv3/ROS Robotic Pan/Tilt "Headshot" Turret
+# Robotic "Headshot" Turret, Using YOLOv3 & ROS
 ### Full Parts-List, Installation, and Build Tutorial with Code.
 
 This is an end-to-end build/installation tutorial with a full parts/hardware list, pretrained YOLOv3 weights for "Human head", and ROS packages to build a robotic pan/tilt turret that uses machine learning and relatively inexpensive hardware to autonomously "target" and track human heads.  The code and weights files for this are hosted from a google drive download link included in this readme (simplifies download process), and you can see a few examples of it in action in the gifs below:
