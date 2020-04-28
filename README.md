@@ -9,7 +9,7 @@ This is an end-to-end build guide and installation tutorial with full parts/hard
   <img src="https://github.com/WyattAutomation/YOLOv3-ROS-Robotic-Head-Shot-Turret-/blob/master/kinectshot.gif" height="440" width="660">
 </p>
 
-## Credit to other projects
+## Credit to Other Projects and People
 Of course, Joeseph Redmon's YOLOv3 is used in this project, which can be found here:
 https://pjreddie.com/darknet/yolo/
 
