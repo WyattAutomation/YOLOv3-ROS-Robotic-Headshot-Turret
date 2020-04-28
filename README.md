@@ -27,6 +27,10 @@ https://github.com/WyattAutomation/Train-YOLOv3-with-OpenImagesV4
 
 ## Getting Started
 
+##### If you are just looking for the pretrained YOLOv3 weights for "Human head", they are located at "headshot_main/catkin_ws_src_files/darknet_ros/darknet_ros/yolo_network_config/weights/backup/" from the below Google Drive download link.  
+
+##### NOTE REGARDING OS:  This guide assumes you are using a brand new, untouched installation of Xubuntu 18.04.  This install process likely works just fine on Ubuntu 18.04 with the defualt Gnome desktop too, but I cannot promise it will work on anything else beyond Ubuntu/Xubuntu 18.04.  This is not built for Windows AT ALL, nor do I ever plan to support a Windows installation for this in the future (the next iteration in developement is for ROS2/Xubuntu 20.04).  With that being said, this document assumes you are starting with a fresh installation of Xubuntu 18.04 (my only suggestions is to just buy a cheap SSD to dedicate to this if you are a Windows user and want to try this build). 
+
 ### Download and untar ROS_YOLO_headshot_main.tar.gz, containing all source code and files needed for this project, as well as the pretrained weights for detecting "Human head" from here:
 
 https://drive.google.com/drive/folders/1P23rZR8ul1poW_VWSHgcgzApEtZsTR-6?usp=sharing
@@ -39,8 +43,6 @@ tar -xvf ROS_YOLO_headshot_main.tar.gz
 ```
 
 -This should extract everything to a folder at ~/Downloads/headshot_main
-
-##### If you are just looking for the pretrained YOLOv3 weights for "Human head", they are located at "headshot_main/catkin_ws_src_files/darknet_ros/darknet_ros/yolo_network_config/weights/backup/" from the above download.  Also, this guide assumes you are using a fresh installation of Xubuntu 18.04; it likely works just fine on Ubuntu 18.04 with the defualt Gnome desktop, but I cannot promise it will work on anything else beyond Ubuntu 18.04.  This is not built for Windows, nor do I ever plan to support a Windows installation for this in the future, but with that being said, this document assumes you are starting with a fresh installation of Xubuntu 18.04 (just buy a cheap SSD to dedicate to this if you're a Windows user and want to try this build). 
 
 
 ### Hardware Needed
