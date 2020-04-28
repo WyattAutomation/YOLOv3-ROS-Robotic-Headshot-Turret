@@ -95,7 +95,7 @@ I've tested this setup process from start to finish as of April 26 2020 with Xub
 Get a "vanilla" installation of Xubuntu 18.04 running on a dedicated SSD, then proceeed to the next steps.
 
 #### Arbotix controller and Arduino:
-After assembling the turret kit, plug in the FTDI cable to the Arbotix and the other end to a USB (2 or 3, doesn't matter) port on your PC, then plug in the power supply to the barrel connector on the Arbotix.
+Assemble the turret kit hardware, and plug in the FTDI cable to the ArbotiX controller and the other end to a USB (2 or 3, doesn't matter) port on your Xubuntu PC, then plug in the power supply to the barrel connector on the Arbotix.
 
 Install dependencies for Arduino:
 
