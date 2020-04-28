@@ -9,6 +9,7 @@ This is an end-to-end build guide and installation tutorial with full parts/hard
   <img src="https://github.com/WyattAutomation/YOLOv3-ROS-Robotic-Head-Shot-Turret-/blob/master/kinectshot.gif" height="440" width="660">
 </p>
 
+
 ## Credit to Other Projects and People
 Of course, Joeseph Redmon's YOLOv3 is used in this project, which can be found here:
 https://pjreddie.com/darknet/yolo/
@@ -270,6 +271,10 @@ python ~/Downloads/headshot_main/headshot.py
 ```
 
 You may see warnings and several other things scroll quickly accross the terminal screen before landing at the collection of windows that look like they do in the screenshot below; with the pan/tilt turret now tracking the nearest detected "Human head"!
+
+<p align="center">
+  <img src="https://github.com/WyattAutomation/YOLOv3-ROS-Robotic-Headshot-Turret/blob/master/Screenshot_2020-04-27_22-07-37.png" height="200" width="330">
+</p>
 
 
 ## NOTES/Manual Launch Instructions/Debugging:
