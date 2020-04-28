@@ -88,7 +88,7 @@ Desktop/Laptop PC:
 
 #### OS:
 
-I've tested this setup process from start to finish as of April 26 2020 with Xubuntu 18.04 and can confirm it works without issue.  You can download it from here, and simply burn the iso to a usb using rufus or Etcher: https://xubuntu.org/release/18-04/
+I've tested this setup process from start to finish as of April 26 2020 with Xubuntu 18.04 and can confirm it works without issue.  You can download it from here, and simply burn the iso to a thumb drive using rufus or Etcher: https://xubuntu.org/release/18-04/
 
 *When installing Xubuntu 18.04, uncheck installing any additional software in order to avoid issues with the wrong Nvidia drivers being installed.  Also, be careful to download 18.04 and not the newest 20.04!  I am working on a ROS2 improvement of this project that may be released in the near future, that will work with 20.04, but for now, stick with 18.04.*
 
