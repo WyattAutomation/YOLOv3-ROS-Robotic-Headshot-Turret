@@ -65,7 +65,7 @@ http://shop.orbbec3d.com/Astra-Pro_p_35.html
 
 Desktop/Laptop PC:
 ```
-    NVidia GPU, 4GB+ VRAM minimum, reccomended 2018 or newer
+    NVidia GPU, 4GB+ VRAM minimum, reccomended Compute Architecture 5.x or later
     At least a quad-core, 3.0GHz per-core CPU, AMD or Intel
 ```
 
