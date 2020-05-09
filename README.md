@@ -60,7 +60,7 @@ https://www.trossenrobotics.com/p/phantomX-robot-turret.aspx
 
 #### PC:
 
-The PC I used for running ROS/YOLOv3 is a quad-core Ryzen 3, with an Nvidia GTX 1060 (6GB VRAM), with 8GB of system memory.  As long as you have an NVidia GPU from roughly 2018 or newer with 4GB+ of VRAM you should be fine; however you may run into CUDA compatibity issues with legacy GPUs and I'm not going to help resolve issues of that category.  If you can't get CUDA 10.1 installed on your system via the instructions provided here, I'm not going to help address it as it is outside the primary scope of this document.  With that being said, this doesn't require anything spectacular to get YOLO running in ROS at about 30 FPS, just try to keep in mind that older legacy Nvidia GPUs may not work.
+The PC I used for running ROS/YOLOv3 is a quad-core Ryzen 3, with an Nvidia GTX 1060 (6GB VRAM), with 8GB of system memory.  As long as you have an NVidia GPU with compute architecture 5.x or newer, with 4GB+ of VRAM you should be fine; however you may run into CUDA compatibity issues with legacy GPUs and I'm not going to help resolve issues of that category.  If you can't get CUDA 10.1 installed on your system via the instructions provided here, I'm not going to help address it as it is outside the primary scope of this document.  With that being said, this doesn't require anything spectacular to get YOLO running in ROS at about 30 FPS, just try to keep in mind that older legacy Nvidia GPUs may not work.
 
 #### Depth Camera:
 
@@ -315,4 +315,3 @@ roslaunch yolo_targeting head_track.launch
 
 If there are any questions on using this with a Kinect, I will be updating it soon to include instructions for this.  You basically only need to change parameters for the ros_darknet node to subscribe to the image topic (which has a different name), and instead of the astra_pro_camera package, you'll use the freenect_stack package from another repo.  I will update this soon to include these instructions.
 
-Have fun, don't do anything stupid, and YOLO, robot style! (v3 at least)..
