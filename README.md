@@ -4,9 +4,9 @@
 This is an end-to-end build guide and installation tutorial with full parts/hardware listing, download for pretrained YOLOv3 weights for detecting "Human head", with Arduino and ROS source code to build a robotic pan/tilt turret that uses machine learning and relatively inexpensive hardware to autonomously detect and target human heads.  The code and weights files for this are hosted from a google drive download link included in this readme (simplifies download and install process), and you can see a few examples of it in action in the gifs below:
 
 
-<img src="https://github.com/WyattAutomation/YOLOv3-ROS-Robotic-Head-Shot-Turret-/blob/master/orbbec.gif" height="400" width="285" align="left"> <img src="https://github.com/WyattAutomation/YOLOv3-ROS-Robotic-Head-Shot-Turret-/blob/master/lasershot.gif" height="400" width="510" align="right"> 
+<img src="https://github.com/WyattAutomation/YOLOv3-ROS-Robotic-Head-Shot-Turret-/blob/master/orbbec.gif" height="400" width="285" align="left">  
 <p align="center">
-  <img src="https://github.com/WyattAutomation/YOLOv3-ROS-Robotic-Head-Shot-Turret-/blob/master/kinectshot.gif" height="440" width="660">
+  <img src="https://github.com/WyattAutomation/YOLOv3-ROS-Robotic-Head-Shot-Turret-/blob/master/kinectshot.gif" height="400" width="550">
 </p>
 
 
