@@ -10,23 +10,6 @@ This is an end-to-end build guide and installation tutorial with full parts/hard
 </p>
 
 
-## Credit to Other Projects and People
-Of course, Joeseph Redmon's YOLOv3 is used in this project, which can be found here:
-https://pjreddie.com/darknet/yolo/
-
-The ROS Package for porting YOLOv3 to ROS used in this project is a fork of Legged Robotic's "darknet_ros" which can be found here:
-https://github.com/leggedrobotics/darknet_ros
-
-The ROS package for ros_astra_camera used in this project can be found here (ROS driver for the Orbbec Astra Pro):
-https://github.com/orbbec/ros_astra_camera
-
-Also, I will include a previous project of my own, where I document how to create the weights I use in this project for YOLOv3 from Google's Open Images Dataset:
-https://github.com/WyattAutomation/Train-YOLOv3-with-OpenImagesV4
-
-And last, but certainly not least, the remaining 3 ROS packages I created for use in this project, were based on and/or derived from code included in Patrick Goebel's (aka Pirobot) "Robotics by Example, Volume 2".  If you like my project here, please go take a look at RBX2, and if you can find a copy of Patrick's book I highly, highly reccomend buying it as it will point you in the right direction for *many* different applications of robotics well beyond the scope of my project here. 
-https://github.com/pirobot
-
-
 ## Getting Started 
 
 ##### NOTE REGARDING OS:  This guide assumes you are using a brand new, untouched installation of Xubuntu 18.04.  This install process likely works just fine on Ubuntu 18.04 with the defualt Gnome desktop too, but I cannot promise it will work on anything else beyond Ubuntu/Xubuntu 18.04.  This is not built for Windows AT ALL, nor do I ever plan to support a Windows installation for this in the future (the next iteration in developement is for ROS2/Xubuntu 20.04).  With that being said, this document assumes you are starting with a fresh installation of Xubuntu 18.04 (my only suggestion for Windows users is to just buy a cheap SSD to dedicate to this if you really want to try this build). 
@@ -315,3 +298,19 @@ roslaunch yolo_targeting head_track.launch
 
 If there are any questions on using this with a Kinect, I will be updating it soon to include instructions for this.  You basically only need to change parameters for the ros_darknet node to subscribe to the image topic (which has a different name), and instead of the astra_pro_camera package, you'll use the freenect_stack package from another repo.  I will update this soon to include these instructions.
 
+
+## Credit to Other Projects and People
+Of course, Joeseph Redmon's YOLOv3 is used in this project, which can be found here:
+https://pjreddie.com/darknet/yolo/
+
+The ROS Package for porting YOLOv3 to ROS used in this project is a fork of Legged Robotic's "darknet_ros" which can be found here:
+https://github.com/leggedrobotics/darknet_ros
+
+The ROS package for ros_astra_camera used in this project can be found here (ROS driver for the Orbbec Astra Pro):
+https://github.com/orbbec/ros_astra_camera
+
+Also, I will include a previous project of my own, where I document how to create the weights I use in this project for YOLOv3 from Google's Open Images Dataset:
+https://github.com/WyattAutomation/Train-YOLOv3-with-OpenImagesV4
+
+And last, but certainly not least, the remaining 3 ROS packages I created for use in this project, were based on and/or derived from code included in Patrick Goebel's (aka Pirobot) "Robotics by Example, Volume 2".  If you like my project here, please go take a look at RBX2, and if you can find a copy of Patrick's book I highly, highly reccomend buying it as it will point you in the right direction for *many* different applications of robotics well beyond the scope of my project here. 
+https://github.com/pirobot
