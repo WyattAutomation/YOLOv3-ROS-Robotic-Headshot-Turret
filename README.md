@@ -273,7 +273,7 @@ If you have any issues with this system not working from the headshot.py script,
 roslaunch turret_init turret_init.launch
 ```
 
--With the previous command still running, open another terminal and run this one directly after (the darknet and yolo_targeting packages both require this to be running first).  This is the launchfile to initialize the Astra Pro Camera:
+-With the previous command still running, open another terminal and run this one directly after (the darknet and yolo_targeting packages both require this to be running first).  This is the roslaunch command that initializes the Astra Pro Camera:
 ```
 roslaunch astra_camera astrapro.launch
 ```
