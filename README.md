@@ -283,7 +283,7 @@ roslaunch astra_camera astrapro.launch
 roslaunch turret_controller head_tracker.launch
 ```
 
--Open yet another terminal with the previous commands still running, and start the ros_darknet node, which I've preconfigured to load the weights for "Human head".  This node subscribes to the rgb messages from the "/camera/rgb/image_raw" topic published by the Astra Camera node.  You can find this configured in "~/catkin_headshot/src/darknet_ros/darknet_ros/launch/ros_headshot.launch"   I have already put the weights in the proper directory for this, as well as preconfigured the .yaml files, the yolo network config, launchfile and other related components to work for detecting "human head".  Should you have issues with this node, the ros_darknet issues thread in the "credits" section at the start of this repo is a good place to start.  Roslaunch command for this package/node is:
+-Open yet another terminal with the previous commands still running, and start the ros_darknet node, which I've preconfigured to load the weights for "Human head".  This node subscribes to the rgb messages from the "/camera/rgb/image_raw" topic published by the Astra Camera node.  You can find this configured in "~/catkin_headshot/src/darknet_ros/darknet_ros/launch/ros_headshot.launch"   I have already put the weights in the proper directory for this, as well as preconfigured the .yaml files, the yolo network config, launchfile and other related components to work for detecting "human head".  Should you have issues with this node, the ros_darknet issues thread in the "credits" section at the end of this repo and is a good place to start.  Roslaunch command for this package/node is:
 ```
 roslaunch darknet_ros darknet_ros_headshot.launch
 ```
