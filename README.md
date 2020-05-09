@@ -288,7 +288,7 @@ roslaunch turret_controller head_tracker.launch
 roslaunch darknet_ros darknet_ros_headshot.launch
 ```
 
--Finally, with all of those above commands running, run the roslaunch command in another new terminal from the "yolo_targeting" package.  This launches the "head_track.py" node from the yolo_targeting package in your src folder in the catkin worksapce, which subscribes to the bounding box data topic published by the ros_darknet node and the depth registered pointcloud of the astra pro, uses the bounding box data to get the center x,y position of the object detected in the depth registered rgb image, converts that to the u,v 2D position of the center of the detected object in the depth frame, pulls the related 3D xyz data associated with the depth frame, and converts that to a pose stamped messaged that it then publishes for the turrent_controller/headtracker package/node to subscribe to.
+-Finally, with all of those above commands running, run the roslaunch command in another new terminal from the "yolo_targeting" package.  This launches the "head_track.py" node from the yolo_targeting package in your src folder in the catkin workspace, which subscribes to the bounding box data topic published by the ros_darknet node and the depth registered pointcloud of the astra pro, uses the bounding box data to get the center x,y position of the object detected in the depth registered rgb image, translates that to the u,v 2D position of the center of the detected object in the depth frame, pulls the related 3D xyz data associated with the depth frame for that coordinate, and converts that to a pose stamped messaged that it then publishes for the turret_controller/headtracker node to subscribe to.
 ```
 roslaunch yolo_targeting head_track.launch
 ```
